@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLAYGROUND</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080b12;
+    --surface: #0e131d;
+    --surface-2: #141a25;
+    --text: #f5f7fb;
+    --muted: #8d96a8;
+    --primary: #735cff;
+    --primary-light: #8c7aff;
+    --border: rgba(255,255,255,.07);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family:
+        Arial,
+        "Noto Sans KR",
+        sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    height: 76px;
+    padding: 0 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: rgba(8,11,18,.88);
+    backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 55px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--primary);
+    margin-left: 3px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav a {
+    color: #858da0;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .2s;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: white;
+}
+
+.nav a.active {
+    position: relative;
+}
+
+.nav a.active::after {
+    content: "";
+
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    background: var(--primary);
+    border-radius: 50%;
+
+    left: 50%;
+    bottom: -13px;
+
+    transform: translateX(-50%);
+}
+
+
+/* HEADER RIGHT */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.search {
+    width: 290px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 15px;
+
+    background: #111722;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+}
+
+.search span {
+    color: #697286;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.search input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+    font-size: 12px;
+}
+
+.search input::placeholder {
+    color: #626b7d;
+}
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: #111722;
+    color: #a0a8b7;
+
+    cursor: pointer;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    border: none;
+    background: transparent;
+
+    color: #b8bfcb;
+
+    cursor: pointer;
+}
+
+.profile-image {
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #725cff,
+        #a78bfa
+    );
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #080b12 0%,
+            rgba(8,11,18,.92) 20%,
+            rgba(8,11,18,.35) 55%,
+            rgba(8,11,18,.7) 100%
+        ),
+        linear-gradient(
+            0deg,
+            #080b12 0%,
+            transparent 40%
+        ),
+        url("https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=2000&q=90");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    width: 1200px;
+    height: 100%;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #b3aaff;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-bottom: 15px;
+}
+
+.hero-label span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+    box-shadow: 0 0 12px var(--primary);
+}
+
+.hero h1 {
+    font-size: 70px;
+    line-height: .95;
+
+    letter-spacing: -3px;
+}
+
+.hero h1 strong {
+    color: var(--primary-light);
+}
+
+.hero p {
+    color: #b1b7c4;
+
+    font-size: 14px;
+    line-height: 1.8;
+
+    margin-top: 24px;
+}
+
+.hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 18px;
+
+    color: #a5adbb;
+    font-size: 12px;
+}
+
+.hero-meta span:first-child {
+    color: #ffd66b;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 10px;
+
+    margin-top: 30px;
+}
+
+.play-button,
+.detail-button {
+    height: 46px;
+
+    padding: 0 25px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.play-button {
+    border: none;
+
+    color: white;
+    background: var(--primary);
+
+    box-shadow:
+        0 10px 35px rgba(115,92,255,.25);
+}
+
+.play-button:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.detail-button {
+    color: white;
+
+    background: rgba(255,255,255,.07);
+
+    border: 1px solid rgba(255,255,255,.12);
+}
+
+.detail-button:hover {
+    background: rgba(255,255,255,.12);
+}
+
+.hero-dots {
+    position: absolute;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 7px;
+}
+
+.hero-dots span {
+    width: 22px;
+    height: 3px;
+
+    border-radius: 3px;
+
+    background: rgba(255,255,255,.2);
+}
+
+.hero-dots span.active {
+    width: 35px;
+    background: white;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+    width: 1200px;
+    margin: auto;
+}
+
+.section {
+    padding-top: 70px;
+}
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+.section-label {
+    display: block;
+
+    color: var(--primary-light);
+
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    letter-spacing: -.7px;
+}
+
+.more {
+    color: #7e8798;
+    font-size: 12px;
+}
+
+.more:hover {
+    color: white;
+}
+
+
+/* =========================
+   CONTINUE
+========================= */
+
+.continue-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 18px;
+}
+
+.continue-card {
+    overflow: hidden;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    transition: .25s;
+}
+
+.continue-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,.12);
+}
+
+.game-image {
+    height: 150px;
+
+    position: relative;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.image-1 {
+    background-image:
+        url("https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=700&q=80");
+}
+
+.image-2 {
+    background-image:
+        url("https://images.unsplash.com/photo-1544550285-f813152fb2fd?auto=format&fit=crop&w=700&q=80");
+}
+
+.image-3 {
+    background-image:
+        url("https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80");
+}
+
+.playing {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    padding: 4px 8px;
+
+    border-radius: 4px;
+
+    background: #5b46e8;
+
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.continue-info {
+    padding: 15px;
+
+    display: flex;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.continue-info h3 {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.continue-info p {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.progress {
+    width: 105px;
+    align-self: center;
+}
+
+.progress-bar {
+    height: 3px;
+
+    background: #292f3b;
+
+    border-radius: 3px;
+
+    overflow: hidden;
+}
+
+.progress-bar span {
+    display: block;
+
+    height: 100%;
+
+    background: var(--primary);
+}
+
+.progress small {
+    display: block;
+
+    color: #656e7e;
+
+    font-size: 9px;
+
+    margin-top: 5px;
+}
+
+
+/* =========================
+   GAME GRID
+========================= */
+
+.game-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 18px;
+}
+
+.game-card {
+    cursor: pointer;
+}
+
+.thumbnail {
+    height: 190px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 9px;
+
+    background-size: cover;
+    background-position: center;
+
+    transition: .25s;
+}
+
+.game-card:hover .thumbnail {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
+}
+
+.thumb-1 {
+    background-image:
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=85");
+}
+
+.thumb-2 {
+    background-image:
+        url("https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=700&q=85");
+}
+
+.thumb-3 {
+    background-image:
+        url("https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=700&q=85");
+}
+
+.thumb-4 {
+    background-image:
+        url("https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?auto=format&fit=crop&w=700&q=85");
+}
+
+.card-badge {
+    position: absolute;
+
+    top: 11px;
+    left: 11px;
+
+    padding: 5px 8px;
+
+    border-radius: 4px;
+
+    background: #6d5aff;
+
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.card-badge.hot {
+    background: #ef5350;
+}
+
+.favorite {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    width: 31px;
+    height: 31px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.5);
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.quick-play {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-45%);
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+    color: #111;
+
+    opacity: 0;
+
+    transition: .25s;
+
+    cursor: pointer;
+}
+
+.game-card:hover .quick-play {
+    opacity: 1;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+.game-info {
+    padding: 12px 2px;
+}
+
+.game-info h3 {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.creator {
+    color: #727b8b;
+    font-size: 10px;
+}
+
+.game-bottom {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    color: #697284;
+    font-size: 9px;
+}
+
+.rating {
+    color: #f5c65a;
+}
+
+
+/* =========================
+   DISCOVER
+========================= */
+
+.discover-section {
+    display: grid;
+
+    grid-template-columns:
+        1fr 350px;
+
+    gap: 45px;
+
+    padding-top: 75px;
+}
+
+.wide-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 18px;
+}
+
+.wide-card {
+    overflow: hidden;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.wide-image {
+    height: 180px;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.wide-1 {
+    background-image:
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=85");
+}
+
+.wide-2 {
+    background-image:
+        url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=85");
+}
+
+.wide-content {
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wide-content h3 {
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.wide-content p {
+    color: #727b8b;
+    font-size: 9px;
+
+    margin-top: 4px;
+}
+
+.category {
+    color: var(--primary-light);
+
+    font-size: 8px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.wide-content button {
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    color: white;
+    background: var(--primary);
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   RANKING
+========================= */
+
+.ranking {
+    padding: 20px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.ranking-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+.ranking-header h2 {
+    font-size: 20px;
+}
+
+.live-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #4ade80;
+
+    box-shadow:
+        0 0 10px #4ade80;
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.rank-item:last-child {
+    border-bottom: none;
+}
+
+.rank-item > strong {
+    width: 22px;
+
+    color: #596273;
+
+    font-size: 11px;
+}
+
+.rank-image {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 6px;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.rank-1 {
+    background-image:
+        url("https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=150&q=80");
+}
+
+.rank-2 {
+    background-image:
+        url("https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=150&q=80");
+}
+
+.rank-3 {
+    background-image:
+        url("https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=150&q=80");
+}
+
+.rank-4 {
+    background-image:
+        url("https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=150&q=80");
+}
+
+.rank-5 {
+    background-image:
+        url("https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?auto=format&fit=crop&w=150&q=80");
+}
+
+.rank-info {
+    flex: 1;
+}
+
+.rank-info h3 {
+    font-size: 11px;
+}
+
+.rank-info p {
+    color: #687183;
+
+    font-size: 9px;
+
+    margin-top: 4px;
+}
+
+.up {
+    color: #4ade80;
+    font-size: 9px;
+}
+
+.down {
+    color: #f87171;
+    font-size: 9px;
+}
+
+
+/* =========================
+   GENRE
+========================= */
+
+.genre-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(6,1fr);
+
+    gap: 12px;
+
+    padding-bottom: 80px;
+}
+
+.genre {
+    height: 115px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    padding: 17px;
+
+    overflow: hidden;
+
+    border-radius: 9px;
+
+    background-size: cover;
+    background-position: center;
+
+    transition: .25s;
+}
+
+.genre::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            0deg,
+            rgba(0,0,0,.8),
+            rgba(0,0,0,.05)
+        );
+}
+
+.genre:hover {
+    transform: translateY(-4px);
+}
+
+.genre span,
+.genre small {
+    position: relative;
+}
+
+.genre span {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.genre small {
+    color: #a8afbc;
+    font-size: 8px;
+
+    margin-top: 2px;
+}
+
+.genre-rpg {
+    background-image:
+        url("https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=500&q=80");
+}
+
+.genre-action {
+    background-image:
+        url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80");
+}
+
+.genre-fps {
+    background-image:
+        url("https://images.unsplash.com/photo-1542751371-adc38448a05d?auto=format&fit=crop&w=500&q=80");
+}
+
+.genre-sim {
+    background-image:
+        url("https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=500&q=80");
+}
+
+.genre-racing {
+    background-image:
+        url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=500&q=80");
+}
+
+.genre-casual {
+    background-image:
+        url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=500&q=80");
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    border-top: 1px solid var(--border);
+
+    background: #06080d;
+
+    padding: 35px 0;
+}
+
+.footer-top,
+.footer-bottom {
+    width: 1200px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-logo {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer-logo span {
+    color: var(--primary);
+}
+
+.footer-links {
+    display: flex;
+    gap: 22px;
+}
+
+.footer-links a {
+    color: #646d7d;
+    font-size: 10px;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border);
+
+    color: #4e5665;
+
+    font-size: 9px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1250px) {
+
+    .container,
+    .hero-content,
+    .footer-top,
+    .footer-bottom {
+        width: calc(100% - 60px);
+    }
+
+    .header {
+        padding: 0 30px;
+    }
+
+    .discover-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .nav {
+        display: none;
+    }
+
+    .search {
+        width: 200px;
+    }
+
+    .game-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .genre-grid {
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .continue-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 55px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .header {
+        padding: 0 18px;
+    }
+
+    .header-right .search,
+    .profile span {
+        display: none;
+    }
+
+    .container,
+    .hero-content,
+    .footer-top,
+    .footer-bottom {
+        width: calc(100% - 36px);
+    }
+
+    .hero {
+        height: 500px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .wide-grid,
+    .game-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .genre-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="header-left">
+
+        <a href="#" class="logo">
+            PLAY<span>GROUND</span>
+        </a>
+
+        <nav class="nav">
+            <a href="#" class="active">홈</a>
+            <a href="#">게임</a>
+            <a href="#">랭킹</a>
+            <a href="#">커뮤니티</a>
+            <a href="#">크리에이터</a>
+        </nav>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <div class="search">
+            <span>⌕</span>
+            <input
+                type="text"
+                placeholder="게임, 장르 또는 크리에이터 검색"
+            >
+        </div>
+
+        <button class="icon-button">
+            ♧
+        </button>
+
+        <button class="profile">
+            <div class="profile-image">M</div>
+            <span>내 계정</span>
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-background"></div>
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+            <span></span>
+            지금 가장 많이 플레이하는 게임
+        </div>
+
+        <h1>
+            NIGHT<br>
+            <strong>FALL</strong>
+        </h1>
+
+        <p>
+            어둠이 내려앉은 도시에서 펼쳐지는<br>
+            새로운 액션 어드벤처를 경험하세요.
+        </p>
+
+        <div class="hero-meta">
+            <span>★ 4.9</span>
+            <span>·</span>
+            <span>액션</span>
+            <span>·</span>
+            <span>12.4K 플레이 중</span>
+        </div>
+
+        <div class="hero-buttons">
+
+            <button class="play-button">
+                ▶ &nbsp; 지금 플레이
+            </button>
+
+            <button class="detail-button">
+                자세히 보기
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="hero-dots">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+</section>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <!-- 최근 플레이 -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <span class="section-label">CONTINUE</span>
+                <h2>최근 플레이</h2>
+            </div>
+
+            <a href="#" class="more">
+                모두 보기 →
+            </a>
+
+        </div>
+
+
+        <div class="continue-grid">
+
+            <article class="continue-card">
+
+                <div class="game-image image-1">
+
+                    <span class="playing">
+                        PLAYING
+                    </span>
+
+                </div>
+
+                <div class="continue-info">
+
+                    <div>
+                        <h3>Shadow Protocol</h3>
+                        <p>FPS · DarkStudio</p>
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-bar">
+                            <span style="width:72%"></span>
+                        </div>
+
+                        <small>72% 진행</small>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="continue-card">
+
+                <div class="game-image image-2"></div>
+
+                <div class="continue-info">
+
+                    <div>
+                        <h3>Ocean Life</h3>
+                        <p>Simulation · BlueWave</p>
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-bar">
+                            <span style="width:43%"></span>
+                        </div>
+
+                        <small>43% 진행</small>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="continue-card">
+
+                <div class="game-image image-3"></div>
+
+                <div class="continue-info">
+
+                    <div>
+                        <h3>Cyber Rush</h3>
+                        <p>Racing · PixelWorks</p>
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-bar">
+                            <span style="width:31%"></span>
+                        </div>
+
+                        <small>31% 진행</small>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 추천 게임 -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <span class="section-label">FOR YOU</span>
+                <h2>추천 게임</h2>
+            </div>
+
+            <a href="#" class="more">
+                더 많은 게임 →
+            </a>
+
+        </div>
+
+
+        <div class="game-grid">
+
+
+            <article class="game-card">
+
+                <div class="thumbnail thumb-1">
+
+                    <div class="card-badge">
+                        NEW
+                    </div>
+
+                    <button class="favorite">
+                        ♡
+                    </button>
+
+                    <button class="quick-play">
+                        ▶
+                    </button>
+
+                </div>
+
+                <div class="game-info">
+
+                    <h3>Neon District</h3>
+
+                    <p class="creator">
+                        NeonWorks
+                    </p>
+
+                    <div class="game-bottom">
+
+                        <span class="rating">
+                            ★ 4.8
+                        </span>
+
+                        <span>
+                            8.2K 플레이
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="game-card">
+
+                <div class="thumbnail thumb-2">
+
+                    <button class="favorite">
+                        ♡
+                    </button>
+
+                    <button class="quick-play">
+                        ▶
+                    </button>
+
+                </div>
+
+                <div class="game-info">
+
+                    <h3>Lost Island</h3>
+
+                    <p class="creator">
+                        WildPixel
+                    </p>
+
+                    <div class="game-bottom">
+
+                        <span class="rating">
+                            ★ 4.7
+                        </span>
+
+                        <span>
+                            6.7K 플레이
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="game-card">
+
+                <div class="thumbnail thumb-3">
+
+                    <div class="card-badge hot">
+                        HOT
+                    </div>
+
+                    <button class="favorite">
+                        ♡
+                    </button>
+
+                    <button class="quick-play">
+                        ▶
+                    </button>
+
+                </div>
+
+                <div class="game-info">
+
+                    <h3>Street Legends</h3>
+
+                    <p class="creator">
+                        RushGames
+                    </p>
+
+                    <div class="game-bottom">
+
+                        <span class="rating">
+                            ★ 4.9
+                        </span>
+
+                        <span>
+                            14.1K 플레이
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="game-card">
+
+                <div class="thumbnail thumb-4">
+
+                    <button class="favorite">
+                        ♡
+                    </button>
+
+                    <button class="quick-play">
+                        ▶
+                    </button>
+
+                </div>
+
+                <div class="game-info">
+
+                    <h3>Kingdom Era</h3>
+
+                    <p class="creator">
+                        Moonlight
+                    </p>
+
+                    <div class="game-bottom">
+
+                        <span class="rating">
+                            ★ 4.6
+                        </span>
+
+                        <span>
+                            4.3K 플레이
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- TRENDING + RANKING -->
+
+    <section class="discover-section">
+
+
+        <div>
+
+            <div class="section-header">
+
+                <div>
+                    <span class="section-label">
+                        TRENDING
+                    </span>
+
+                    <h2>지금 뜨는 게임</h2>
+                </div>
+
+            </div>
+
+
+            <div class="wide-grid">
+
+
+                <article class="wide-card">
+
+                    <div class="wide-image wide-1"></div>
+
+                    <div class="wide-content">
+
+                        <div>
+
+                            <span class="category">
+                                RPG
+                            </span>
+
+                            <h3>
+                                Realm of Heroes
+                            </h3>
+
+                            <p>
+                                새로운 모험이 시작됩니다.
+                            </p>
+
+                        </div>
+
+                        <button>
+                            ▶
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="wide-card">
+
+                    <div class="wide-image wide-2"></div>
+
+                    <div class="wide-content">
+
+                        <div>
+
+                            <span class="category">
+                                SURVIVAL
+                            </span>
+
+                            <h3>
+                                After World
+                            </h3>
+
+                            <p>
+                                끝까지 살아남으세요.
+                            </p>
+
+                        </div>
+
+                        <button>
+                            ▶
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RANKING -->
+
+        <aside class="ranking">
+
+            <div class="ranking-header">
+
+                <div>
+
+                    <span class="section-label">
+                        LIVE
+                    </span>
+
+                    <h2>실시간 인기</h2>
+
+                </div>
+
+                <span class="live-dot"></span>
+
+            </div>
+
+
+            <div class="rank-item">
+
+                <strong>01</strong>
+
+                <div class="rank-image rank-1"></div>
+
+                <div class="rank-info">
+
+                    <h3>Night Fall</h3>
+
+                    <p>12,421명 플레이 중</p>
+
+                </div>
+
+                <span class="up">
+                    ▲ 3
+                </span>
+
+            </div>
+
+
+            <div class="rank-item">
+
+                <strong>02</strong>
+
+                <div class="rank-image rank-2"></div>
+
+                <div class="rank-info">
+
+                    <h3>Street Legends</h3>
+
+                    <p>9,843명 플레이 중</p>
+
+                </div>
+
+                <span class="up">
+                    ▲ 1
+                </span>
+
+            </div>
+
+
+            <div class="rank-item">
+
+                <strong>03</strong>
+
+                <div class="rank-image rank-3"></div>
+
+                <div class="rank-info">
+
+                    <h3>Lost Island</h3>
+
+                    <p>7,221명 플레이 중</p>
+
+                </div>
+
+                <span class="down">
+                    ▼ 1
+                </span>
+
+            </div>
+
+
+            <div class="rank-item">
+
+                <strong>04</strong>
+
+                <div class="rank-image rank-4"></div>
+
+                <div class="rank-info">
+
+                    <h3>Cyber Rush</h3>
+
+                    <p>6,832명 플레이 중</p>
+
+                </div>
+
+                <span class="up">
+                    ▲ 5
+                </span>
+
+            </div>
+
+
+            <div class="rank-item">
+
+                <strong>05</strong>
+
+                <div class="rank-image rank-5"></div>
+
+                <div class="rank-info">
+
+                    <h3>Kingdom Era</h3>
+
+                    <p>5,219명 플레이 중</p>
+
+                </div>
+
+                <span>
+                    -
+                </span>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+
+
+    <!-- 장르 -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    EXPLORE
+                </span>
+
+                <h2>
+                    장르별로 찾아보기
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="genre-grid">
+
+            <a href="#" class="genre genre-rpg">
+                <span>RPG</span>
+                <small>124개의 게임</small>
+            </a>
+
+            <a href="#" class="genre genre-action">
+                <span>ACTION</span>
+                <small>87개의 게임</small>
+            </a>
+
+            <a href="#" class="genre genre-fps">
+                <span>FPS</span>
+                <small>64개의 게임</small>
+            </a>
+
+            <a href="#" class="genre genre-sim">
+                <span>SIMULATION</span>
+                <small>52개의 게임</small>
+            </a>
+
+            <a href="#" class="genre genre-racing">
+                <span>RACING</span>
+                <small>31개의 게임</small>
+            </a>
+
+            <a href="#" class="genre genre-casual">
+                <span>CASUAL</span>
+                <small>96개의 게임</small>
+            </a>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-top">
+
+        <div class="footer-logo">
+            PLAY<span>GROUND</span>
+        </div>
+
+        <div class="footer-links">
+
+            <a href="#">회사소개</a>
+            <a href="#">이용약관</a>
+            <a href="#">개인정보처리방침</a>
+            <a href="#">고객센터</a>
+            <a href="#">개발자센터</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 PLAYGROUND. All rights reserved.
+        </span>
+
+        <span>
+            Discord · YouTube · X
+        </span>
+
+    </div>
+
+</footer>
+
+
+</body>
+</html>
+```

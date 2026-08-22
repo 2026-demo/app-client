@@ -1,11 +1,11 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Menus = [
-    { name: "Home", path: "/", active: true },
-    { name: "Games", path: "/games", active: false },
-    { name: "Ranking", path: "/ranking", active: false },
-    { name: "Community", path: "/community", active: false },
-    { name: "Creator", path: "/creator", active: false }
+    { name: "Home", path: "/", },
+    { name: "Games", path: "/games" },
+    { name: "Ranking", path: "/ranking" },
+    { name: "Community", path: "/community" },
+    { name: "Creator", path: "/creator" }
 ]
 
 const BasicLayout = () => {
@@ -20,9 +20,9 @@ const BasicLayout = () => {
                     <ul className="menu flex gap-7">
                         {Menus.map((menu) => (
                             <li>
-                                <Link to={menu.path} className={`
+                                <NavLink to={menu.path} className={({isActive})=>`
                                         text-sm
-                                        ${menu.active ? 
+                                        ${isActive ? 
                                             `
                                             relative
                                             text-white
@@ -32,13 +32,16 @@ const BasicLayout = () => {
                                         }
                                     `}>
                                     {menu.name}
-                                </Link>
+                                </NavLink>
                             </li>
                         ))}
                     </ul>
                 </div>
                 <div className="header-right">
-                    
+                    <div className="search flex gap-1">
+                        <div className="search-icon ">⌕</div>
+                        <input type="text" placeholder="게임, 장르 또는 크리에이터 검색" />
+                    </div>
                 </div>
             </header>
             <main>
