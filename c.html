@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLAYGROUND - LOGIN</title>
+<style>
+/* =========================================================
+   DESIGN SYSTEM (제공받은 b.html & App.css 기반)
+========================================================= */
+:root {
+    --bg: #07090e;
+    --bg-soft: #0b0e15;
+    --panel: #10141d;
+    --panel-hover: #151a25;
+
+    --white: #f7f8fb;
+    --text: #d9dce4;
+    --muted: #7d8493;
+    --dim: #515866;
+
+    --accent: #725cff;
+    --accent-light: #9181ff;
+
+    --green: #55d98a;
+    --yellow: #f5c968;
+    --red: #ff6565;
+
+    --line: rgba(255,255,255,.065);
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --font-sans: Inter, Pretendard, "Noto Sans KR", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 배경 오로라 라이트 */
+.bg-glow {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(114,92,255,0.12) 0%, rgba(7,9,14,0) 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.login-container {
+    position: relative;
+    z-index: 1;
+    width: min(840px, calc(100% - 48px));
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* =========================================================
+   LEFT: CAMPFIRE CHARACTER
+========================================================= */
+.character-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* 대화 말풍선 */
+.speech-bubble-left {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    animation: float 3s ease-in-out infinite;
+    text-align: center;
+}
+
+.speech-bubble-left p {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.5;
+}
+
+.speech-bubble-left span {
+    color: var(--accent-light);
+}
+
+.speech-bubble-left::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px 8px 0;
+    border-style: solid;
+    border-color: var(--panel) transparent;
+}
+
+/* 모닥불 & 캐릭터 아트워크 */
+.campfire-box {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.fire-glow {
+    position: relative;
+    width: 48px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.flame {
+    position: absolute;
+    bottom: 10px;
+    width: 26px;
+    height: 36px;
+    background: linear-gradient(to top, var(--red), var(--yellow));
+    border-radius: 50% 50% 20% 20%;
+    filter: drop-shadow(0 0 12px rgba(255,101,101,0.6));
+    animation: burn 0.8s ease-in-out infinite alternate;
+}
+
+.logs {
+    width: 42px;
+    height: 8px;
+    background: #363c48;
+    border-radius: 4px;
+}
+
+.stick-figure {
+    width: 32px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.head {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--text);
+    border-radius: 50%;
+}
+
+.body-line {
+    width: 2px;
+    height: 22px;
+    background: var(--text);
+    position: relative;
+}
+
+.arm {
+    position: absolute;
+    top: 6px;
+    left: -8px;
+    width: 18px;
+    height: 2px;
+    background: var(--text);
+    transform: rotate(-20deg);
+}
+
+/* =========================================================
+   RIGHT: LOGIN PANEL
+========================================================= */
+.login-panel {
+    flex: 1.2;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.brand-logo {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 24px;
+}
+
+.brand-logo span {
+    color: var(--accent-light);
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-group input {
+    width: 100%;
+    height: 44px;
+    background: rgba(255,255,255,0.035);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 0 14px;
+    color: var(--white);
+    font-size: 13px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.input-group input:focus {
+    border-color: rgba(114,92,255,0.6);
+    background: rgba(255,255,255,0.055);
+    box-shadow: 0 0 15px rgba(114,92,255,0.2);
+}
+
+.input-group input::placeholder {
+    color: var(--dim);
+}
+
+/* 대답 버튼 영역 */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.btn-primary, .btn-secondary {
+    flex: 1;
+    height: 44px;
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--white);
+    color: #11131a;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,255,255,0.15);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.055);
+    color: var(--white);
+    border: 1px solid var(--line);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+/* ANIMATIONS */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+@keyframes burn {
+    0% { transform: scale(0.92); opacity: 0.85; }
+    100% { transform: scale(1.08); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="login-container">
+
+    <!-- 좌측: 모닥불 캐릭터 & 질문 말풍선 -->
+    <div class="character-section">
+        <div class="speech-bubble-left">
+            <p>안녕하세요!<br>혹시 <span>저희 본 적 있나요?</span></p>
+        </div>
+
+        <div class="campfire-box">
+            <div class="fire-glow">
+                <div class="flame"></div>
+                <div class="logs"></div>
+            </div>
+            <div class="stick-figure">
+                <div class="head"></div>
+                <div class="body-line">
+                    <div class="arm"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 우측: 로그인/회원가입 입력 패널 -->
+    <div class="login-panel">
+        <div class="brand-logo">
+            PLAY<span>GROUND</span>
+        </div>
+
+        <form onsubmit="return false;">
+            <div class="input-group">
+                <label>아이디 (ID)</label>
+                <input type="text" placeholder="아이디를 입력하세요">
+            </div>
+
+            <div class="input-group">
+                <label>비밀번호 (PASSWORD)</label>
+                <input type="password" placeholder="비밀번호를 입력하세요">
+            </div>
+
+            <div class="action-buttons">
+                <button type="submit" class="btn-primary">"네, 로그인할게요"</button>
+                <button type="button" class="btn-secondary">"처음이에요 (회원가입)"</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

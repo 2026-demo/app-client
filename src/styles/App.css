@@ -20,10 +20,20 @@
   ========================================================= */
 
     /* 카드 기본 배경 */
-    --color-card-bg: #10141d;
+    --color-surface-bg: #10141d;
 
     /* 카드 hover 시 */
-    --color-card-hover-bg: #151a25;
+    --color-surface-hover-bg: #151a25;
+
+    /* input 글씨 */
+    --color-input: #656c7a;
+
+    /* input 테두리 */
+    --color-input-border: #252b38;
+
+    /* input hover 시 테두리 */
+    --color-input-hover-border: #725cff73;
+    
 
 
     /* =========================================================
@@ -32,16 +42,19 @@
   ========================================================= */
 
     /* 가장 밝은 텍스트 */
-    --color-white: #f7f8fb;
-
-    /* 일반 본문 텍스트 */
-    --color-text: #d9dce4;
+    --color-neutral-50:  #f7f8fb;
+    --color-neutral-100: #e9ebf0;
+    --color-neutral-200: #d9dce4;
+    --color-neutral-300: #b8bdc8;
+    --color-neutral-400: #969daa;
+    --color-neutral-500: #7d8493;
+    --color-neutral-600: #656c7a;
+    --color-neutral-700: #515866;
+    --color-neutral-800: #363c48;
+    --color-neutral-900: #252b38;
+    --color-neutral-950: #16181c;
 
     /* 설명 문구 */
-    --color-muted: #7d8493;
-
-    /* 비활성화 텍스트 */
-    --color-disabled: #515866;
 
 
     /* =========================================================
@@ -50,10 +63,18 @@
   ========================================================= */
 
     /* 메인 브랜드 컬러 */
-    --color-accent: #725cff;
+    --color-primary-50:  #f5f2ff;
+    --color-primary-100: #e5dfff;
+    --color-primary-200: #c9c0ff;
+    --color-primary-300: #aaa0ff;
+    --color-primary-400: #9181ff;
+    --color-primary-500: #725cff;
+    --color-primary-600: #6048e8;
+    --color-primary-700: #5039cc;
+    --color-primary-800: #402eb0;
+    --color-primary-900: #302394;
+    --color-primary-950: #211879;
 
-    /* hover 또는 gradient용 */
-    --color-accent-light: #9181ff;
 
 
     /* =========================================================
@@ -157,6 +178,7 @@
     button,
     input {
         font: inherit;
+        outline: none;
     }
 
     button {
