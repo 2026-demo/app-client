@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import Logo from "../assets/logo.svg";
+import logo from "../assets/logo.svg";
 
 const Menus = [
     { name: "홈", path: "/", },
@@ -16,7 +16,7 @@ const BasicLayout = () => {
                 <div className="inner container flex items-center justify-between">
                     <div className="header-left flex gap-12">
                         <a href="/" className="logo flex gap-1">
-                            <img src={Logo} alt="Logo" />
+                            <img src={logo} alt="Logo" />
                             <p className="text-xl font-bold text-white">LU</p>
                             <p className="text-xl font-bold text-primary-400">MEN</p>
                         </a>
@@ -55,9 +55,7 @@ const BasicLayout = () => {
                     </div>
                 </div>
             </header>
-            <main>
-                <Outlet />
-            </main>
+            <Outlet />
             <footer></footer>
         </>
     );
