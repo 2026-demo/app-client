@@ -15,11 +15,11 @@ const BasicLayout = () => {
             <header className="flex justify-center items-center h-20 border-b border-neutral-950">
                 <div className="inner container flex items-center justify-between">
                     <div className="header-left flex gap-12">
-                        <a href="/" className="logo flex gap-1">
+                        <Link to="/" className="logo flex gap-1">
                             <img src={logo} alt="Logo" />
                             <p className="text-xl font-bold text-white">LU</p>
                             <p className="text-xl font-bold text-primary-400">MEN</p>
-                        </a>
+                        </Link>
                         <ul className="menu flex gap-7">
                             {Menus.map((menu) => (
                                 <li>
