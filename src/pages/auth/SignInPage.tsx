@@ -47,10 +47,10 @@ const SignInPage = () => {
           </div>
           <ul className="inputs flex flex-col gap-6.5">
             <li className="flex flex-col gap-2.5">
-              <p className="text-xs text-neutral-300">아이디 (ID)</p>
+              <p className="text-xs text-neutral-300">사용자 이름 (USERNAME)</p>
               <div className="flex border-2 border-neutral-900  bg-neutral-950 rounded-xl transition duration-300 hover:border-primary-500 focus-within:border-primary-500">
                 <UserRound size={20} className="m-4 text-neutral-600" />
-                <input type="text" placeholder="아이디를 입력하세요" className="text-sm placeholder:text-neutral-400" />
+                <input type="text" placeholder="사용자 이름을 입력하세요" className="text-sm placeholder:text-neutral-400" />
               </div>
             </li>
             <li className="flex flex-col gap-2.5">
